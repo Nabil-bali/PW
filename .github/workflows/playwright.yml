@@ -26,8 +26,8 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-  env:
-    USER_LOGIN: ${{ secrets.USER_LOGIN }}
-    USER_LOCKED_NAME: ${{ secrets.USER_LOCKED_NAME }}
-    USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+    env:
+      USER_LOGIN: ${{ secrets.USER_LOGIN }}
+      USER_LOCKED_NAME: ${{ secrets.USER_LOCKED_NAME }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
