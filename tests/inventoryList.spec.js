@@ -49,8 +49,8 @@ test.describe("inventory list test suite", () =>  {
         await SortingDropdown.selectOption('za');
 
         const firstProductTtitle = await page.locator('[data-test="inventory-item"]').locator('[data-test="inventory-item-name"]').nth(0).innerText()
-        // expect(firstProductTtitle).toStrictEqual("Sauce Labs Backpack");
-        expect(firstProductTtitle).toBe("Test.allTheThings() T-Shirt (Red)");
+        expect(firstProductTtitle).toStrictEqual("Sauce Labs Backpack");
+        // expect(firstProductTtitle).toBe("Test.allTheThings() T-Shirt (Red)");
     })
     
 

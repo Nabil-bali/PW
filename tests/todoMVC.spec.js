@@ -3,10 +3,9 @@ const { before, beforeEach, describe } = require('node:test');
 require('dotenv').config();
 
 /**
- * gestion des credentials
  * page object model (avant faire des action "customCommands")
  * ci/cd
- * attacher à un repository github
+ * changer nom du fichier d'artifact
  */
 
 test.beforeEach(async ({ page }) => {
