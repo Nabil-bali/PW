@@ -3,9 +3,8 @@ const { before, beforeEach, describe } = require('node:test');
 require('dotenv').config();
 
 /**
- * page object model (avant faire des action "customCommands")
- * ci/cd
  * changer nom du fichier d'artifact
+ * cron (scheduled pipeline in github actions)
  */
 
 test.beforeEach(async ({ page }) => {

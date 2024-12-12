@@ -1,6 +1,9 @@
 const { test, expect } = require('@playwright/test');
 const { InventoryPage } = require('./pages/inventory.page')
-const { LoginPage } = require('./pages/login.page')
+const { LoginPage } = require('./pages/login.page');
+const { CartPage } = require('./pages/cart.page');
+const { CheckoutFormPage } = require('./pages/checkoutForm.page');
+const { CheckoutOverviewPage } = require('./pages/checkoutOverview.page');
 require('dotenv').config();
 
 test.beforeEach(async ({ page }) => {  
@@ -32,16 +35,8 @@ test.describe("inventory list test suite", () =>  {
         await selectedItem.getByText("Remove").waitFor({state: "detached"})
     })
 
-    test("Remove a product from cart with POM", async ({page}) => {
-        const inventoryPage = new InventoryPage(page);
-        let sauceLabTShirt = await inventoryPage.getProduct('Sauce Labs Bolt T-Shirt')
-        await sauceLabTShirt.addToCart()
-        await expect(await inventoryPage.numberOfProductSpan.innerText()).toHaveText("1")
-        await sauceLabTShirt.remove()
-        await inventoryPage.numberOfProductSpan.waitFor({state: "detached"});
-        await sauceLabTShirt.removeButton.waitFor({state: "detached"});
-    })
     
+
     test("assert card are well displayed", async ({page}) => {
         expect(await page.locator('[data-test="inventory-item"]').locator('[data-test="inventory-item-name"]').all()).toHaveLength(6)
         const currentAvailableProducts = await page.locator('[data-test="inventory-item"]').locator('[data-test="inventory-item-name"]').allTextContents()
