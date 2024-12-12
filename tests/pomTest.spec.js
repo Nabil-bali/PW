@@ -14,7 +14,7 @@ test.beforeEach(async ({ page }) => {
 
 test.describe("pom tests", () => {
 
-    test("Remove a product from cart with POM", async ({page}) => {
+    test("Remove a product from cart with POM", { tag: '@nightly' }, async ({page}) => {
         const inventoryPage = new InventoryPage(page);
         let sauceLabTShirt = await inventoryPage.getProduct('Sauce Labs Bolt T-Shirt')
         await sauceLabTShirt.addToCart()
@@ -24,7 +24,7 @@ test.describe("pom tests", () => {
         await sauceLabTShirt.removeButton.waitFor({state: "detached"});
     })
 
-    test("Assert product fields with POM", async ({page}) => {
+    test("Assert product fields with POM", { tag: '@nightly' }, async ({page}) => {
         const inventoryPage = new InventoryPage(page);
         let allProducts = await inventoryPage.getAllProducts()
         let [sauceLabTShirt] = allProducts.filter(p => p.title === "Sauce Labs Bolt T-Shirt");
@@ -36,7 +36,7 @@ test.describe("pom tests", () => {
         })  
     })
 
-    test("Buy a product with POM", async ({page}) => {
+    test("Buy a product with POM", { tag: '@nightly' }, async ({page}) => {
         const inventoryPage = new InventoryPage(page);
         const cartPage = new CartPage(page);
         const checkoutFormPage = new CheckoutFormPage(page)
@@ -52,4 +52,8 @@ test.describe("pom tests", () => {
         await checkoutOverviewPage.finishButton.click()
 
     })
+
+    
 })
+
+test("batch actions", { tag: "@batch"},  () => expect(["myArray"]).toHaveLength(1))
