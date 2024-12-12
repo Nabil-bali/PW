@@ -1,10 +1,10 @@
-name: Playwright Tests
+name: Batch pipeline
 on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
 jobs:
-  test:
+  batch_pipeline:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:

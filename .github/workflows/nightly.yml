@@ -1,10 +1,10 @@
-name: Playwright Tests
+name: nightly e-2-e tests pipeline
 on:
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
 jobs:
-  test:
+  nightly_tests_pipeline:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:

@@ -51,7 +51,7 @@ test.describe("inventory list test suite", () =>  {
     })
 
     test("Order by unalphabetic order", async ({page}) => {
-        const inventoryPage = new InventoryPage()
+        const inventoryPage = new InventoryPage(page)
         await inventoryPage.sortingDropdown.selectOption('za');
 
         const firstProductTtitle = await page.locator('[data-test="inventory-item"]').locator('[data-test="inventory-item-name"]').nth(0).innerText()
