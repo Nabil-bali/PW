@@ -1,7 +1,7 @@
 name: Batch pipeline
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 10 1 1 *'
   workflow_dispatch:
 jobs:
   batch_pipeline:
