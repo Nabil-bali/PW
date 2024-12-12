@@ -27,8 +27,13 @@ test.describe("pom tests", () => {
     test("Assert product fields with POM", async ({page}) => {
         const inventoryPage = new InventoryPage(page);
         let allProducts = await inventoryPage.getAllProducts()
-        // assert
+        let [sauceLabTShirt] = allProducts.filter(p => p.title === "Sauce Labs Bolt T-Shirt");
         
+        expect(sauceLabTShirt).toMatchObject({
+            "title": "Sauce Labs Bolt T-Shirt",
+            "description": "Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.",
+            "price" :"15.99"
+        })  
     })
 
     test("Buy a product with POM", async ({page}) => {
