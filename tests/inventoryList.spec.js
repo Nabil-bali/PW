@@ -1,11 +1,12 @@
 const { test, expect } = require('@playwright/test');
+const { InventoryPage } = require('./pages/inventory.page')
+const { LoginPage } = require('./pages/login.page')
 require('dotenv').config();
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page }) => {  
     await page.goto('/')
-    await page.locator('[data-test="username"]').fill(process.env.USER_LOGIN);
-    await page.locator('[data-test="password"]').fill(process.env.USER_PASSWORD);
-    await page.locator('[data-test="login-button"]').click();
+    const loginPage = new LoginPage(page);
+    await loginPage.login(process.env.USER_LOGIN,process.env.USER_PASSWORD)
 })
 
 test.describe("inventory list test suite", () =>  {
@@ -30,6 +31,16 @@ test.describe("inventory list test suite", () =>  {
         await page.locator('[data-test="shopping-cart-badge"]').waitFor({state: "detached"})
         await selectedItem.getByText("Remove").waitFor({state: "detached"})
     })
+
+    test("Remove a product from cart with POM", async ({page}) => {
+        const inventoryPage = new InventoryPage(page);
+        let sauceLabTShirt = await inventoryPage.getProduct('Sauce Labs Bolt T-Shirt')
+        await sauceLabTShirt.addToCart()
+        await expect(await inventoryPage.numberOfProductSpan.innerText()).toHaveText("1")
+        await sauceLabTShirt.remove()
+        await inventoryPage.numberOfProductSpan.waitFor({state: "detached"});
+        await sauceLabTShirt.removeButton.waitFor({state: "detached"});
+    })
     
     test("assert card are well displayed", async ({page}) => {
         expect(await page.locator('[data-test="inventory-item"]').locator('[data-test="inventory-item-name"]').all()).toHaveLength(6)
@@ -45,8 +56,8 @@ test.describe("inventory list test suite", () =>  {
     })
 
     test("Order by unalphabetic order", async ({page}) => {
-        const SortingDropdown = page.locator('.product_sort_container')
-        await SortingDropdown.selectOption('za');
+        const inventoryPage = new InventoryPage()
+        await inventoryPage.sortingDropdown.selectOption('za');
 
         const firstProductTtitle = await page.locator('[data-test="inventory-item"]').locator('[data-test="inventory-item-name"]').nth(0).innerText()
         expect(firstProductTtitle).toStrictEqual("Sauce Labs Backpack");
