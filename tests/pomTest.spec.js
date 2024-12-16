@@ -6,13 +6,15 @@ const { CheckoutFormPage } = require('./pages/checkoutForm.page');
 const { CheckoutOverviewPage } = require('./pages/checkoutOverview.page');
 require('dotenv').config();
 
-test.beforeEach(async ({ page }) => {  
-    await page.goto('/')
-    const loginPage = new LoginPage(page);
-    await loginPage.login(process.env.USER_LOGIN,process.env.USER_PASSWORD)
-})
+
 
 test.describe("pom tests", () => {
+    
+    test.beforeEach(async ({ page }) => {  
+        await page.goto('/')
+        const loginPage = new LoginPage(page);
+        await loginPage.login(process.env.USER_LOGIN,process.env.USER_PASSWORD)
+    })
 
     test("Remove a product from cart with POM", { tag: '@nightly' }, async ({page}) => {
         const inventoryPage = new InventoryPage(page);
@@ -53,6 +55,9 @@ test.describe("pom tests", () => {
 
     })
 
+    test.afterEach(async ({page}) => {
+        await page.close()
+    })
     
 })
 

@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/')
 })
 
-test.describe.skip("Connection test suite", () => {
+test.describe("Connection test suite", () => {
 
     test("I connect successfully to saucedemo", async ({ page }) => {
 
