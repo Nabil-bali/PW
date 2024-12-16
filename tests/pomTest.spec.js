@@ -16,11 +16,21 @@ test.describe("pom tests", () => {
         await loginPage.login(process.env.USER_LOGIN,process.env.USER_PASSWORD)
     })
 
-    test("Remove a product from cart with POM", { tag: '@nightly' }, async ({page}) => {
+    test("Remove a product from cart with POM", { tag: '@ret' }, async ({page}) => {
         const inventoryPage = new InventoryPage(page);
         let sauceLabTShirt = await inventoryPage.getProduct('Sauce Labs Bolt T-Shirt')
         await sauceLabTShirt.addToCart()
-        await expect(await inventoryPage.numberOfProductSpan.innerText()).toHaveText("1")
+        await expect(await inventoryPage.numberOfProductSpan).toHaveText("1")
+        await sauceLabTShirt.remove()
+        await inventoryPage.numberOfProductSpan.waitFor({state: "detached"});
+        await sauceLabTShirt.removeButton.waitFor({state: "detached"});
+    })
+
+    test("Remove a product from cart with POM (failed)", { tag: '@ret' }, async ({page}) => {
+        const inventoryPage = new InventoryPage(page);
+        let sauceLabTShirt = await inventoryPage.getProduct('Sauce Labs Bolt T-Shirt')
+        await sauceLabTShirt.addToCart()
+        await expect(await inventoryPage.numberOfProductSpan).toHaveText("8")
         await sauceLabTShirt.remove()
         await inventoryPage.numberOfProductSpan.waitFor({state: "detached"});
         await sauceLabTShirt.removeButton.waitFor({state: "detached"});

@@ -35,6 +35,12 @@ module.exports = defineConfig({
     trace: 'only-on-failure',
 
     screenshot: 'only-on-failure',
+    
+    /* video: 'only-on-failure', => don't exist*/
+    // video: {
+    //     mode: 'retain-on-failure',
+    //     size: { width: 640, height: 480 }
+    //   },
 
     permissions: ['geolocation'],
 
@@ -45,7 +51,15 @@ module.exports = defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        trace: 'only-on-failure',
+        screenshot: 'only-on-failure',
+        video: {
+          mode: 'retain-on-failure',
+          size: { width: 640, height: 480 }
+        },
+      },
     },
 
     // {
