@@ -10,6 +10,7 @@
     "test-batch": "npx playwright test --grep \"batch\"",
     "test-batch-by-text": "npx playwright test --grep \"batch\"",
     "test-chromium": "npx playwright test --project=chromium",
+    "test-setup": "npx playwright test --project ui-tests",
     "test-parallelized": "npx playwright test --project=chromium --workers=3",
     "test-ui": "npx playwright test --project=chromium --ui",
     "text-must-succed": "npx playwright test --project=chromium --max-failures -10",
