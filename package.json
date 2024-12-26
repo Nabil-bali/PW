@@ -10,19 +10,19 @@
     "test-batch": "npx playwright test --grep \"batch\"",
     "test-batch-by-text": "npx playwright test --grep \"batch\"",
     "test-chromium": "npx playwright test --project=chromium",
-    "test-setup": "npx playwright test --project ui-tests",
+    "test-setup": "npx playwright test --project=ui-tests",
     "test-parallelized": "npx playwright test --project=chromium --workers=3",
     "test-ui": "npx playwright test --project=chromium --ui",
     "text-must-succed": "npx playwright test --project=chromium --max-failures -10",
     "test-pom-absolutePath": "npx playwright test tests/pomTest --grep \"@nightly\" --reporter=list",
     "test-pom": "npx playwright test pomTest --grep \"@nightly\" --reporter=list",
-    "test-pom-ui": "npx playwright test pomTest --grep \"@nightly\" --reporter=list --ui"  
+    "test-pom-ui": "npx playwright test pomTest --grep \"@nightly\" --reporter=list --ui"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.49.0"
+    "@playwright/test": "^1.49.1"
   },
   "dependencies": {
     "dotenv": "^16.4.7"
